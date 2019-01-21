@@ -19,8 +19,9 @@
         "DateTime",
         "SAP",
         "week",
-        "timestamp",
-        "date"
+        "date",
+        "time",
+        "timestamp"
     ],
     "minimum-stability": "stable",
     "require": {
