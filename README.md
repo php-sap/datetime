@@ -15,7 +15,7 @@ Extends PHP's DateTime class by SAP week, date, time and timestamp format.
 ## Usage
 
 ```
-composer require kba-team/sap-datetime:~1.0.0
+composer require php-sap/datetime:~1.0.0
 ```
 
 ### Parse a SAP week string into a DateTime object. 
