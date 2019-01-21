@@ -9,6 +9,7 @@ Extends PHP's DateTime class by SAP week, date, time and timestamp format.
 
 * SAP week in format `<year><week>`
 * SAP date in format `<year><month><day>`
+* SAP time in format `<hour><minute><second>`
 * SAP timestamp in format `<year><month><day><hour><minute><second>`
 
 ## Usage
