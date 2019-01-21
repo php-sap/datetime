@@ -65,6 +65,30 @@ echo $dateTime->format(SapDateTime::SAP_DATE) . PHP_EOL;
  */
 ```
 
+### Parse a SAP time string into a DateTime object
+
+```php
+<?php
+use phpsap\DateTime\SapDateTime;
+$dateTime = SapDateTime::createFromFormat(SapDateTime::SAP_TIME, '132001');
+echo $dateTime->format('H:i:s') . PHP_EOL;
+/**
+ * Output: 13-20-01
+ */
+```
+
+### Format a DateTime object as SAP time
+
+```php
+<?php
+use phpsap\DateTime\SapDateTime;
+$dateTime = new SapDateTime('21:45:05');
+echo $dateTime->format(SapDateTime::SAP_TIME) . PHP_EOL;
+/**
+ * Output: 214505
+ */
+```
+
 ### Parse a SAP timestamp into a DateTime object
 
 ```php
