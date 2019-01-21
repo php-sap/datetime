@@ -34,6 +34,11 @@ class SapDateTime extends \DateTime
     const SAP_DATE = 'Ymd';
 
     /**
+     * @const string SAP time format
+     */
+    const SAP_TIME = 'His';
+
+    /**
      * @const string SAP timestamp format.
      */
     const SAP_TIMESTAMP = 'YmdHis';

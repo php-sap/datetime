@@ -147,6 +147,46 @@ class SapDateTimeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Data provider of times and their according SAP time strings.
+     * @return array
+     */
+    public static function timesAndSapTimes()
+    {
+        return [
+            ['08:10:31', '081031'],
+            ['21:12:00', '211200'],
+            ['12:01:01', '120101'],
+            ['13:20:45', '132045'],
+        ];
+    }
+
+    /**
+     * Test formatting an ISO time as SAP time.
+     * @param string $isoTime
+     * @param string $sapTime
+     * @throws \Exception
+     * @dataProvider timesAndSapTimes
+     */
+    public function testCreateSapTimes($isoTime, $sapTime)
+    {
+        $dateTime = new SapDateTime($isoTime);
+        static::assertSame($sapTime, $dateTime->format(SapDateTime::SAP_TIME));
+    }
+
+    /**
+     * Test reading time from SAP and formatting it as ISO.
+     * @param string $isoTime
+     * @param string $sapTime
+     * @throws \Exception
+     * @dataProvider timesAndSapTimes
+     */
+    public function testParseSapTimes($isoTime, $sapTime)
+    {
+        $dateTime = SapDateTime::createFromFormat(SapDateTime::SAP_TIME, $sapTime);
+        static::assertSame($isoTime, $dateTime->format('H:i:s'));
+    }
+
+    /**
      * Data provider of timestamps and their according SAP dates.
      * @return array
      */
