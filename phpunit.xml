@@ -10,7 +10,7 @@
         syntaxCheck="true"
 >
     <testsuites>
-        <testsuite name="PHP/SAP DateTime extenstion tests">
+        <testsuite name="PHP/SAP DateTime extension tests">
             <directory suffix="Test.php">tests/</directory>
         </testsuite>
     </testsuites>
