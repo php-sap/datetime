@@ -5,7 +5,8 @@
 [![Maintainability][maintainability-badge]][maintainability]
 [![Test Coverage][coverage-badge]][coverage]
 
-Extends PHP's DateTime class by SAP week, date, time and timestamp format.
+Extends PHP's [DateTime][datetime] class by SAP week, date, time and timestamp
+format. Extends PHP's [DateInterval][dateinterval] class by SAP time format.
 
 * SAP week in format `<year><week>`
 * SAP date in format `<year><month><day>`
@@ -78,6 +79,28 @@ echo $dateTime->format('H:i:s') . PHP_EOL;
  */
 ```
 
+### Parse a SAP time string into a DateInterval object
+
+This example uses 25 hours to demonstrate the usage of a DateInterval object
+in combination with a DateTime object. Please beware, that the `format()`
+method is more like PHP's `sprintf()` and less like `date()`.
+
+```php
+<?php
+use phpsap\DateTime\SapDateInterval;
+$time = SapDateInterval::createFromDateString('252003');
+echo $time->format('%H:%I:%S') . PHP_EOL;
+/**
+ * Output: 25:20:03
+ */
+$date = new DateTime('2018-11-01 00:00:00');
+$date->add($time);
+echo $date->format('Y-m-d H:i:s');
+/**
+ * Output: 2018-11-02 01:20:03
+ */
+```
+
 ### Format a DateTime object as SAP time
 
 ```php
@@ -85,6 +108,18 @@ echo $dateTime->format('H:i:s') . PHP_EOL;
 use phpsap\DateTime\SapDateTime;
 $dateTime = new SapDateTime('21:45:05');
 echo $dateTime->format(SapDateTime::SAP_TIME) . PHP_EOL;
+/**
+ * Output: 214505
+ */
+```
+
+### Format a DateInterval object as SAP time
+
+```php
+<?php
+use phpsap\DateTime\SapDateInterval;
+$time = new SapDateInterval('PTH21M45S05');
+echo $time->format(SapDateInterval::SAP_TIME) . PHP_EOL;
 /**
  * Output: 214505
  */
@@ -121,3 +156,5 @@ echo $dateTime->format(SapDateTime::SAP_TIMESTAMP) . PHP_EOL;
 [maintainability]: https://codeclimate.com/github/php-sap/datetime/maintainability
 [coverage-badge]: https://api.codeclimate.com/v1/badges/1bfab925e39bfaf242fc/test_coverage
 [coverage]: https://codeclimate.com/github/php-sap/datetime/test_coverage
+[datetime]: https://www.php.net/manual/en/class.datetime.php
+[dateinterval]: https://www.php.net/manual/en/class.dateinterval.php
