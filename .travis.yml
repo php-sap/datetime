@@ -1,11 +1,11 @@
 language: php
-sudo: false
+os: linux
 php:
-- 5.5
-- 5.6
 - 7.0
 - 7.1
 - 7.2
+- 7.3
+- 7.4
 env:
   global:
   - CC_TEST_REPORTER_ID=a8cbf54ef2884175dc3bb747b33c826351d3a2d758f9145a5eeac97e48b36a34
