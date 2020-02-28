@@ -91,6 +91,11 @@ class SapDateTime extends \DateTime
             return parent::createFromFormat($format, $time, $timezone)
                 ->setTime(0, 0, 0);
         }
+        if ($timezone === null) {
+            return parent::createFromFormat($format, $time);
+        }
+        //@codeCoverageIgnoreStart
         return parent::createFromFormat($format, $time, $timezone);
+        //@codeCoverageIgnoreEnd
     }
 }
