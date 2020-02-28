@@ -68,6 +68,27 @@ class SapDateTime extends \DateTime
     }
 
     /**
+     * Parse an SAP date string into a new DateTime object.
+     *
+     * @param string $sapDate String representing the SAP date.
+     * @param \DateTimeZone $timezone A DateTimeZone object representing the desired
+     *                                time zone.
+     * @return \DateTime|false
+     */
+    public static function createFromSapDate($sapDate, $timezone = null)
+    {
+        if ($timezone === null) {
+            $result = parent::createFromFormat(static::SAP_DATE, $sapDate);
+        } else {
+            $result = parent::createFromFormat(static::SAP_DATE, $sapDate, $timezone);
+        }
+        if ($result !== false) {
+            $result->setTime(0, 0, 0);
+        }
+        return $result;
+    }
+
+    /**
      * Parse a string into a new DateTime object according to the specified format.
      *
      * @param string        $format   Format accepted by date().
@@ -87,13 +108,8 @@ class SapDateTime extends \DateTime
         if ($format === static::SAP_WEEK) {
             return static::createFromSapWeek($time, $timezone);
         }
-        if ($format === static::SAP_DATE && $timezone === null) {
-            return parent::createFromFormat($format, $time)
-                ->setTime(0, 0, 0);
-        }
         if ($format === static::SAP_DATE) {
-            return parent::createFromFormat($format, $time, $timezone)
-                ->setTime(0, 0, 0);
+            return static::createFromSapDate($time, $timezone);
         }
         if ($timezone === null) {
             return parent::createFromFormat($format, $time);
