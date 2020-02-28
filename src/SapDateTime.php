@@ -87,6 +87,10 @@ class SapDateTime extends \DateTime
         if ($format === static::SAP_WEEK) {
             return static::createFromSapWeek($time, $timezone);
         }
+        if ($format === static::SAP_DATE) {
+            return parent::createFromFormat($format, $time, $timezone)
+                ->setTime(0, 0, 0);
+        }
         return parent::createFromFormat($format, $time, $timezone);
     }
 }
