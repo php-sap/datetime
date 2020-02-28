@@ -258,4 +258,53 @@ class SapDateTimeTest extends \PHPUnit_Framework_TestCase
         $dateTime = new SapDateTime($isotime);
         static::assertSame($saptime, $dateTime->format(SapDateTime::SAP_TIMESTAMP));
     }
+
+    /**
+     * Data provider for timezones.
+     * @return array
+     */
+    public static function provideTimezones()
+    {
+        return [
+            [
+                SapDateTime::SAP_TIMESTAMP,
+                '20200301000102',
+                new \DateTimeZone('CET'),
+                '2020-03-01T00:01:02+01:00',
+                '2020-02-29T23:01:02+00:00'
+            ],
+            [
+                'Y-m-d H:i:s',
+                '2020-03-01 00:01:02',
+                new \DateTimeZone('CET'),
+                '2020-03-01T00:01:02+01:00',
+                '2020-02-29T23:01:02+00:00'
+            ],
+            [
+                SapDateTime::SAP_DATE,
+                '20200301',
+                new \DateTimeZone('CET'),
+                '2020-03-01T00:00:00+01:00',
+                '2020-02-29T23:00:00+00:00'
+            ]
+        ];
+    }
+
+    /**
+     * Test timezones.
+     * @dataProvider provideTimezones
+     * @param string $format
+     * @param string $time
+     * @param \DateTimeZone $zone
+     * @param string $expected
+     * @param string $utc
+     * @throws \Exception
+     */
+    public function testTimezones($format, $time, $zone, $expected, $utc)
+    {
+        $dateTime = SapDateTime::createFromFormat($format, $time, $zone);
+        static::assertSame($expected, $dateTime->format('c'));
+        $dateTime->setTimezone(new \DateTimeZone('UTC'));
+        static::assertSame($utc, $dateTime->format('c'));
+    }
 }
