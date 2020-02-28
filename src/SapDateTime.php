@@ -103,7 +103,7 @@ class SapDateTime extends \DateTime
     public static function createFromFormat(
         $format,
         $time,
-        \DateTimeZone $timezone = null
+        $timezone = null
     ) {
         if ($format === static::SAP_WEEK) {
             return static::createFromSapWeek($time, $timezone);
