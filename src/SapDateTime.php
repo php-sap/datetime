@@ -82,16 +82,11 @@ class SapDateTime extends \DateTime
     public static function createFromFormat(
         $format,
         $time,
-        $timezone = null
+        \DateTimeZone $timezone = null
     ) {
         if ($format === static::SAP_WEEK) {
             return static::createFromSapWeek($time, $timezone);
         }
-        if ($timezone === null) {
-            return parent::createFromFormat($format, $time);
-        }
-        //@codeCoverageIgnoreStart
         return parent::createFromFormat($format, $time, $timezone);
-        //@codeCoverageIgnoreEnd
     }
 }
