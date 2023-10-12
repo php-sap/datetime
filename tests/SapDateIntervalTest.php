@@ -1,4 +1,5 @@
 <?php
+
 /**
  * File tests/SapDateIntervalTest.php
  *

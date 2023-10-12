@@ -1,4 +1,5 @@
 <?php
+
 /**
  * File src/SapDateInterval.php
  *
