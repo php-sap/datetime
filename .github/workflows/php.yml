@@ -52,6 +52,9 @@ jobs:
       - # Install dependencies
         name: "Install composer dependencies"
         run: "composer install --prefer-dist --no-progress"
+      - # PHP_CodeSniffer
+        name: "PHP_CodeSniffer"
+        run: "php vendor/bin/phpcs"
       - # Run phpunit
         name: "Run phpunit"
         run: "php vendor/bin/phpunit --coverage-clover clover.xml --coverage-text"
