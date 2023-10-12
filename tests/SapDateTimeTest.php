@@ -12,6 +12,7 @@
 namespace tests\phpsap\DateTime;
 
 use phpsap\DateTime\SapDateTime;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class tests\phpsap\DateTime\SapDateTimeTest
@@ -22,7 +23,7 @@ use phpsap\DateTime\SapDateTime;
  * @author  Gregor J.
  * @license MIT
  */
-class SapDateTimeTest extends \PHPUnit_Framework_TestCase
+class SapDateTimeTest extends TestCase
 {
     /**
      * Data provider for valid SAP week strings and the expected output.

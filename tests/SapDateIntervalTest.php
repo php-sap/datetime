@@ -12,6 +12,7 @@
 namespace tests\phpsap\DateTime;
 
 use phpsap\DateTime\SapDateInterval;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class SapDateIntervalTest
@@ -22,7 +23,7 @@ use phpsap\DateTime\SapDateInterval;
  * @author  Gregor J.
  * @license MIT
  */
-class SapDateIntervalTest extends \PHPUnit_Framework_TestCase
+class SapDateIntervalTest extends TestCase
 {
     /**
      * Data provider for valid time return values from SAP.
