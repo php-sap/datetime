@@ -1,7 +1,6 @@
 # SAP DateTime
 
 [![License: MIT][license-mit]](LICENSE)
-[![Build Status][build-status-master]][travis-ci]
 [![Maintainability][maintainability-badge]][maintainability]
 [![Test Coverage][coverage-badge]][coverage]
 
@@ -150,8 +149,6 @@ echo $dateTime->format(SapDateTime::SAP_TIMESTAMP) . PHP_EOL;
 ```
 
 [license-mit]: https://img.shields.io/badge/license-MIT-blue.svg
-[travis-ci]: https://travis-ci.org/php-sap/datetime
-[build-status-master]: https://api.travis-ci.org/php-sap/datetime.svg?branch=master
 [maintainability-badge]: https://api.codeclimate.com/v1/badges/1bfab925e39bfaf242fc/maintainability
 [maintainability]: https://codeclimate.com/github/php-sap/datetime/maintainability
 [coverage-badge]: https://api.codeclimate.com/v1/badges/1bfab925e39bfaf242fc/test_coverage
