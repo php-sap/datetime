@@ -2,10 +2,10 @@ name: PHP
 on:
   push:
     branches:
-      - "main"
+      - "php5"
   pull_request:
     branches:
-      - "main"
+      - "php5"
 permissions:
   contents: "read"
 jobs:
@@ -17,8 +17,6 @@ jobs:
         php-version:
           - "5.5"
           - "5.6"
-#    env:
-#      CC_TEST_REPORTER_ID: "a8cbf54ef2884175dc3bb747b33c826351d3a2d758f9145a5eeac97e48b36a34"
     name: "PHP ${{ matrix.php-version }}"
     steps:
       - # git checkout
@@ -54,15 +52,6 @@ jobs:
       - # Install dependencies
         name: "Install composer dependencies"
         run: "composer install --prefer-dist --no-progress"
-#      - # CodeClimate Reporter Setup
-#        name: "CodeClimate Reporter Setup"
-#        run: |
-#          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-#          chmod +x ./cc-test-reporter
-#          ./cc-test-reporter before-build
       - # Run phpunit
         name: "Run phpunit"
         run: "php vendor/bin/phpunit --coverage-clover clover.xml --coverage-text"
-#        run: |
-#          php vendor/bin/phpunit --coverage-clover clover.xml --coverage-text
-#          ./cc-test-reporter after-build -t clover --exit-code $?
