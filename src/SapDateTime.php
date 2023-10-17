@@ -57,13 +57,13 @@ class SapDateTime extends DateTime
     /**
      * Parse an SAP week string into a new DateTime object.
      *
-     * @param string        $sapWeek  String representing the SAP week.
-     * @param DateTimeZone $timezone A DateTimeZone object representing the desired
+     * @param  string  $sapWeek  String representing the SAP week.
+     * @param  DateTimeZone|null  $timezone A DateTimeZone object representing the desired
      *                                time zone.
      * @return DateTime|bool
      * @throws Exception
      */
-    public static function createFromSapWeek($sapWeek, $timezone = null)
+    public static function createFromSapWeek(string $sapWeek, DateTimeZone $timezone = null)
     {
         if (preg_match(static::$sapWeekRegex, $sapWeek, $matches) !== 1) {
             return false;
@@ -77,7 +77,7 @@ class SapDateTime extends DateTime
      *
      * @param string        $format   Format accepted by date().
      * @param string        $datetime     String representing the time.
-     * @param DateTimeZone $timezone A DateTimeZone object representing the desired
+     * @param  DateTimeZone|null  $timezone A DateTimeZone object representing the desired
      *                                time zone.
      * @return DateTime|bool
      * @throws Exception
@@ -87,7 +87,7 @@ class SapDateTime extends DateTime
     public static function createFromFormat(
         $format,
         $datetime,
-        $timezone = null
+        DateTimeZone $timezone = null
     ) {
         if ($format === static::SAP_WEEK) {
             return static::createFromSapWeek($datetime, $timezone);

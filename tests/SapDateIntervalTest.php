@@ -43,13 +43,13 @@ class SapDateIntervalTest extends TestCase
 
     /**
      * Test converting valid times from SAP to an ISO date and time after 2020-01-31.
-     * @param string $sapTime
-     * @param string $startDate
-     * @param string $expected
+     * @param  string  $sapTime
+     * @param  string  $startDate
+     * @param  string  $expected
      * @throws Exception
      * @dataProvider provideValidTimes
      */
-    public function testValidTimes($sapTime, $startDate, $expected)
+    public function testValidTimes(string $sapTime, string $startDate, string $expected)
     {
         $dateTime = new DateTime($startDate);
         $time = SapDateInterval::createFromDateString($sapTime);

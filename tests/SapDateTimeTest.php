@@ -50,13 +50,13 @@ class SapDateTimeTest extends TestCase
     /**
      * Test valid SAP week conversions.
      *
-     * @param string $sapWeek  The SAP week string.
-     * @param string $expected The expected week in format <year>W<week>.
-     * @param string $timestamp The expected timestamp in format Y-m-d H:i:s
+     * @param  string  $sapWeek  The SAP week string.
+     * @param  string  $expected The expected week in format <year>W<week>.
+     * @param  string  $timestamp The expected timestamp in format Y-m-d H:i:s
      * @dataProvider validSapWeeks
      * @throws Exception
      */
-    public function testParseSapWeeks($sapWeek, $expected, $timestamp)
+    public function testParseSapWeeks(string $sapWeek, string $expected, string $timestamp)
     {
         $dateTime = SapDateTime::createFromFormat(SapDateTime::SAP_WEEK, $sapWeek);
         static::assertInstanceOf(DateTime::class, $dateTime);
@@ -82,11 +82,11 @@ class SapDateTimeTest extends TestCase
     /**
      * Test valid SAP week conversions.
      *
-     * @param string $sapWeek  The SAP week string.
+     * @param  string  $sapWeek  The SAP week string.
      * @dataProvider invalidSapWeeks
      * @throws Exception
      */
-    public function testParseInvalidSapWeeks($sapWeek)
+    public function testParseInvalidSapWeeks(string $sapWeek)
     {
         $dateTime = SapDateTime::createFromFormat(SapDateTime::SAP_WEEK, $sapWeek);
         static::assertFalse($dateTime);
@@ -111,12 +111,12 @@ class SapDateTimeTest extends TestCase
 
     /**
      * Test formatting timestamps to SAP week strings.
-     * @param string $timestamp Timestamp string
-     * @param string $expected SAP week string
+     * @param  string  $timestamp Timestamp string
+     * @param  string  $expected SAP week string
      * @throws Exception
      * @dataProvider timestampsAndSapWeeks
      */
-    public function testCreateSapWeeks($timestamp, $expected)
+    public function testCreateSapWeeks(string $timestamp, string $expected)
     {
         $dateTime = new SapDateTime($timestamp);
         $sapWeekString = $dateTime->format(SapDateTime::SAP_WEEK);
@@ -142,12 +142,12 @@ class SapDateTimeTest extends TestCase
 
     /**
      * Test parsing SAP dates.
-     * @param string $sapDate
-     * @param string $isoDate
+     * @param  string  $sapDate
+     * @param  string  $isoDate
      * @throws Exception
      * @dataProvider sapDatesAndIsoDates
      */
-    public function testParseSapDates($sapDate, $isoDate)
+    public function testParseSapDates(string $sapDate, string $isoDate)
     {
         $dateTime = SapDateTime::createFromFormat(SapDateTime::SAP_DATE, $sapDate);
         static::assertSame($isoDate, $dateTime->format('Y-m-d H:i:s'));
@@ -169,12 +169,12 @@ class SapDateTimeTest extends TestCase
 
     /**
      * Test formatting an ISO time as SAP time.
-     * @param string $isoTime
-     * @param string $sapTime
+     * @param  string  $isoTime
+     * @param  string  $sapTime
      * @throws Exception
      * @dataProvider timesAndSapTimes
      */
-    public function testCreateSapTimes($isoTime, $sapTime)
+    public function testCreateSapTimes(string $isoTime, string $sapTime)
     {
         $dateTime = new SapDateTime($isoTime);
         static::assertSame($sapTime, $dateTime->format(SapDateTime::SAP_TIME));
@@ -182,12 +182,12 @@ class SapDateTimeTest extends TestCase
 
     /**
      * Test reading time from SAP and formatting it as ISO.
-     * @param string $isoTime
-     * @param string $sapTime
+     * @param  string  $isoTime
+     * @param  string  $sapTime
      * @throws Exception
      * @dataProvider timesAndSapTimes
      */
-    public function testParseSapTimes($isoTime, $sapTime)
+    public function testParseSapTimes(string $isoTime, string $sapTime)
     {
         $dateTime = SapDateTime::createFromFormat(SapDateTime::SAP_TIME, $sapTime);
         static::assertSame($isoTime, $dateTime->format('H:i:s'));
@@ -212,12 +212,12 @@ class SapDateTimeTest extends TestCase
 
     /**
      * Test formatting DateTime objects as SAP dates.
-     * @param string $timestamp
-     * @param string $sapDate
+     * @param  string  $timestamp
+     * @param  string  $sapDate
      * @throws Exception
      * @dataProvider timestampsAndSapDates
      */
-    public function testCreateSapDates($timestamp, $sapDate)
+    public function testCreateSapDates(string $timestamp, string $sapDate)
     {
         $dateTime = new SapDateTime($timestamp);
         static::assertSame($sapDate, $dateTime->format(SapDateTime::SAP_DATE));
@@ -242,12 +242,12 @@ class SapDateTimeTest extends TestCase
 
     /**
      * Test parsing SAP timestamps.
-     * @param string $isotime
-     * @param string $saptime
+     * @param  string  $isotime
+     * @param  string  $saptime
      * @throws Exception
      * @dataProvider timestampsAndSapTimestamps
      */
-    public function testParseSapTimestamps($isotime, $saptime)
+    public function testParseSapTimestamps(string $isotime, string $saptime)
     {
         $dateTime = SapDateTime::createFromFormat(SapDateTime::SAP_TIMESTAMP, $saptime);
         static::assertSame($isotime, $dateTime->format('Y-m-d H:i:s'));
@@ -255,12 +255,12 @@ class SapDateTimeTest extends TestCase
 
     /**
      * Test formatting DateTime objects as SAP timestamps.
-     * @param string $isotime
-     * @param string $saptime
+     * @param  string  $isotime
+     * @param  string  $saptime
      * @throws Exception
      * @dataProvider timestampsAndSapTimestamps
      */
-    public function testCreateSapTimestamps($isotime, $saptime)
+    public function testCreateSapTimestamps(string $isotime, string $saptime)
     {
         $dateTime = new SapDateTime($isotime);
         static::assertSame($saptime, $dateTime->format(SapDateTime::SAP_TIMESTAMP));
@@ -300,14 +300,14 @@ class SapDateTimeTest extends TestCase
     /**
      * Test timezones.
      * @dataProvider provideTimezones
-     * @param string $format
-     * @param string $time
-     * @param DateTimeZone $zone
-     * @param string $expected
-     * @param string $utc
+     * @param  string  $format
+     * @param  string  $time
+     * @param  DateTimeZone  $zone
+     * @param  string  $expected
+     * @param  string  $utc
      * @throws Exception
      */
-    public function testTimezones($format, $time, $zone, $expected, $utc)
+    public function testTimezones(string $format, string $time, DateTimeZone $zone, string $expected, string $utc)
     {
         $dateTime = SapDateTime::createFromFormat($format, $time, $zone);
         static::assertSame($expected, $dateTime->format('c'));
