@@ -32,7 +32,7 @@ class SapDateIntervalTest extends TestCase
      * Data provider for valid time return values from SAP.
      * @return array
      */
-    public static function provideValidTimes()
+    public static function provideValidTimes(): array
     {
         return [
             ['010203', '2020-01-31 00:00:00', '2020-01-31 01:02:03'],

@@ -34,7 +34,7 @@ class SapDateTimeTest extends TestCase
      *
      * @return array
      */
-    public static function validSapWeeks()
+    public static function validSapWeeks(): array
     {
         return [
             ['201846', '2018 week 46', '2018-11-12 00:00:00'],
@@ -69,7 +69,7 @@ class SapDateTimeTest extends TestCase
      *
      * @return array
      */
-    public static function invalidSapWeeks()
+    public static function invalidSapWeeks(): array
     {
         return [
             ['189952'],
@@ -96,7 +96,7 @@ class SapDateTimeTest extends TestCase
      * Data provider of timestamps and their according SAP week strings.
      * @return array
      */
-    public static function timestampsAndSapWeeks()
+    public static function timestampsAndSapWeeks(): array
     {
         return [
             ['2018-10-19 08:09:10', '201842'],
@@ -127,7 +127,7 @@ class SapDateTimeTest extends TestCase
      * Data provider of SAP dates and their ISO date representations.
      * @return array
      */
-    public static function sapDatesAndIsoDates()
+    public static function sapDatesAndIsoDates(): array
     {
         return [
             ['20181101', '2018-11-01 00:00:00'],
@@ -157,7 +157,7 @@ class SapDateTimeTest extends TestCase
      * Data provider of times and their according SAP time strings.
      * @return array
      */
-    public static function timesAndSapTimes()
+    public static function timesAndSapTimes(): array
     {
         return [
             ['08:10:31', '081031'],
@@ -197,7 +197,7 @@ class SapDateTimeTest extends TestCase
      * Data provider of timestamps and their according SAP dates.
      * @return array
      */
-    public static function timestampsAndSapDates()
+    public static function timestampsAndSapDates(): array
     {
         return [
             ['2018-12-21 08:09:10', '20181221'],
@@ -227,7 +227,7 @@ class SapDateTimeTest extends TestCase
      * Data provider of timestamps and their according SAP timestamps.
      * @return array
      */
-    public static function timestampsAndSapTimestamps()
+    public static function timestampsAndSapTimestamps(): array
     {
         return [
             ['2018-10-19 08:09:10', '20181019080910'],
@@ -270,7 +270,7 @@ class SapDateTimeTest extends TestCase
      * Data provider for timezones.
      * @return array
      */
-    public static function provideTimezones()
+    public static function provideTimezones(): array
     {
         return [
             [

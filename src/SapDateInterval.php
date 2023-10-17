@@ -38,7 +38,7 @@ class SapDateInterval extends DateInterval
      * @throws Exception
      * @link https://php.net/manual/en/dateinterval.createfromdatestring.php
      */
-    public static function createFromDateString($datetime)
+    public static function createFromDateString($datetime): DateInterval
     {
         $matches = [];
         if (preg_match('~^([\d]{2})([0-5][\d])([0-5][\d])$~', $datetime, $matches)) {
