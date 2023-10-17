@@ -56,7 +56,7 @@ class SapDateTime extends \DateTime
      * @param string        $sapWeek  String representing the SAP week.
      * @param \DateTimeZone $timezone A DateTimeZone object representing the desired
      *                                time zone.
-     * @return \DateTime|boolean
+     * @return \DateTime|bool
      * @throws \Exception
      */
     public static function createFromSapWeek($sapWeek, $timezone = null)
@@ -75,7 +75,7 @@ class SapDateTime extends \DateTime
      * @param string        $time     String representing the time.
      * @param \DateTimeZone $timezone A DateTimeZone object representing the desired
      *                                time zone.
-     * @return \DateTime|boolean
+     * @return \DateTime|bool
      * @throws \Exception
      *
      * @link https://php.net/manual/en/datetime.createfromformat.php
