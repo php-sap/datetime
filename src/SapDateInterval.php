@@ -13,6 +13,7 @@
 namespace phpsap\DateTime;
 
 use DateInterval;
+use Exception;
 
 /**
  * Class SapDateInterval
@@ -33,8 +34,8 @@ class SapDateInterval extends DateInterval
     /**
      * Sets up a DateInterval from the relative parts of the string
      * @param string $time
-     * @return \DateInterval
-     * @throws \Exception
+     * @return DateInterval
+     * @throws Exception
      * @link https://php.net/manual/en/dateinterval.createfromdatestring.php
      */
     public static function createFromDateString($time)

@@ -12,6 +12,10 @@
 
 namespace phpsap\DateTime;
 
+use DateTime;
+use DateTimeZone;
+use Exception;
+
 /**
  * Class phpsap\DateTime\SapDateTime
  *
@@ -22,7 +26,7 @@ namespace phpsap\DateTime;
  * @author  Gregor J.
  * @license MIT
  */
-class SapDateTime extends \DateTime
+class SapDateTime extends DateTime
 {
     /**
      * @const string SAP week format.
@@ -54,10 +58,10 @@ class SapDateTime extends \DateTime
      * Parse an SAP week string into a new DateTime object.
      *
      * @param string        $sapWeek  String representing the SAP week.
-     * @param \DateTimeZone $timezone A DateTimeZone object representing the desired
+     * @param DateTimeZone $timezone A DateTimeZone object representing the desired
      *                                time zone.
-     * @return \DateTime|bool
-     * @throws \Exception
+     * @return DateTime|bool
+     * @throws Exception
      */
     public static function createFromSapWeek($sapWeek, $timezone = null)
     {
@@ -73,10 +77,10 @@ class SapDateTime extends \DateTime
      *
      * @param string        $format   Format accepted by date().
      * @param string        $time     String representing the time.
-     * @param \DateTimeZone $timezone A DateTimeZone object representing the desired
+     * @param DateTimeZone $timezone A DateTimeZone object representing the desired
      *                                time zone.
-     * @return \DateTime|bool
-     * @throws \Exception
+     * @return DateTime|bool
+     * @throws Exception
      *
      * @link https://php.net/manual/en/datetime.createfromformat.php
      */

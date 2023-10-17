@@ -12,6 +12,9 @@
 
 namespace tests\phpsap\DateTime;
 
+use DateTime;
+use DateTimeZone;
+use Exception;
 use phpsap\DateTime\SapDateTime;
 use PHPUnit\Framework\TestCase;
 
@@ -51,12 +54,12 @@ class SapDateTimeTest extends TestCase
      * @param string $expected The expected week in format <year>W<week>.
      * @param string $timestamp The expected timestamp in format Y-m-d H:i:s
      * @dataProvider validSapWeeks
-     * @throws \Exception
+     * @throws Exception
      */
     public function testParseSapWeeks($sapWeek, $expected, $timestamp)
     {
         $dateTime = SapDateTime::createFromFormat(SapDateTime::SAP_WEEK, $sapWeek);
-        static::assertInstanceOf(\DateTime::class, $dateTime);
+        static::assertInstanceOf(DateTime::class, $dateTime);
         static::assertSame($expected, $dateTime->format('o \w\e\ek W'));
         static::assertSame($timestamp, $dateTime->format('Y-m-d H:i:s'));
     }
@@ -81,7 +84,7 @@ class SapDateTimeTest extends TestCase
      *
      * @param string $sapWeek  The SAP week string.
      * @dataProvider invalidSapWeeks
-     * @throws \Exception
+     * @throws Exception
      */
     public function testParseInvalidSapWeeks($sapWeek)
     {
@@ -110,7 +113,7 @@ class SapDateTimeTest extends TestCase
      * Test formatting timestamps to SAP week strings.
      * @param string $timestamp Timestamp string
      * @param string $expected SAP week string
-     * @throws \Exception
+     * @throws Exception
      * @dataProvider timestampsAndSapWeeks
      */
     public function testCreateSapWeeks($timestamp, $expected)
@@ -141,7 +144,7 @@ class SapDateTimeTest extends TestCase
      * Test parsing SAP dates.
      * @param string $sapDate
      * @param string $isoDate
-     * @throws \Exception
+     * @throws Exception
      * @dataProvider sapDatesAndIsoDates
      */
     public function testParseSapDates($sapDate, $isoDate)
@@ -168,7 +171,7 @@ class SapDateTimeTest extends TestCase
      * Test formatting an ISO time as SAP time.
      * @param string $isoTime
      * @param string $sapTime
-     * @throws \Exception
+     * @throws Exception
      * @dataProvider timesAndSapTimes
      */
     public function testCreateSapTimes($isoTime, $sapTime)
@@ -181,7 +184,7 @@ class SapDateTimeTest extends TestCase
      * Test reading time from SAP and formatting it as ISO.
      * @param string $isoTime
      * @param string $sapTime
-     * @throws \Exception
+     * @throws Exception
      * @dataProvider timesAndSapTimes
      */
     public function testParseSapTimes($isoTime, $sapTime)
@@ -211,7 +214,7 @@ class SapDateTimeTest extends TestCase
      * Test formatting DateTime objects as SAP dates.
      * @param string $timestamp
      * @param string $sapDate
-     * @throws \Exception
+     * @throws Exception
      * @dataProvider timestampsAndSapDates
      */
     public function testCreateSapDates($timestamp, $sapDate)
@@ -241,7 +244,7 @@ class SapDateTimeTest extends TestCase
      * Test parsing SAP timestamps.
      * @param string $isotime
      * @param string $saptime
-     * @throws \Exception
+     * @throws Exception
      * @dataProvider timestampsAndSapTimestamps
      */
     public function testParseSapTimestamps($isotime, $saptime)
@@ -254,7 +257,7 @@ class SapDateTimeTest extends TestCase
      * Test formatting DateTime objects as SAP timestamps.
      * @param string $isotime
      * @param string $saptime
-     * @throws \Exception
+     * @throws Exception
      * @dataProvider timestampsAndSapTimestamps
      */
     public function testCreateSapTimestamps($isotime, $saptime)
@@ -273,21 +276,21 @@ class SapDateTimeTest extends TestCase
             [
                 SapDateTime::SAP_TIMESTAMP,
                 '20200301000102',
-                new \DateTimeZone('CET'),
+                new DateTimeZone('CET'),
                 '2020-03-01T00:01:02+01:00',
                 '2020-02-29T23:01:02+00:00'
             ],
             [
                 'Y-m-d H:i:s',
                 '2020-03-01 00:01:02',
-                new \DateTimeZone('CET'),
+                new DateTimeZone('CET'),
                 '2020-03-01T00:01:02+01:00',
                 '2020-02-29T23:01:02+00:00'
             ],
             [
                 SapDateTime::SAP_DATE,
                 '20200301',
-                new \DateTimeZone('CET'),
+                new DateTimeZone('CET'),
                 '2020-03-01T00:00:00+01:00',
                 '2020-02-29T23:00:00+00:00'
             ]
@@ -299,16 +302,16 @@ class SapDateTimeTest extends TestCase
      * @dataProvider provideTimezones
      * @param string $format
      * @param string $time
-     * @param \DateTimeZone $zone
+     * @param DateTimeZone $zone
      * @param string $expected
      * @param string $utc
-     * @throws \Exception
+     * @throws Exception
      */
     public function testTimezones($format, $time, $zone, $expected, $utc)
     {
         $dateTime = SapDateTime::createFromFormat($format, $time, $zone);
         static::assertSame($expected, $dateTime->format('c'));
-        $dateTime->setTimezone(new \DateTimeZone('UTC'));
+        $dateTime->setTimezone(new DateTimeZone('UTC'));
         static::assertSame($utc, $dateTime->format('c'));
     }
 }

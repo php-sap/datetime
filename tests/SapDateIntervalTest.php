@@ -12,6 +12,8 @@
 
 namespace tests\phpsap\DateTime;
 
+use DateTime;
+use Exception;
 use phpsap\DateTime\SapDateInterval;
 use PHPUnit\Framework\TestCase;
 
@@ -44,12 +46,12 @@ class SapDateIntervalTest extends TestCase
      * @param string $sapTime
      * @param string $startDate
      * @param string $expected
-     * @throws \Exception
+     * @throws Exception
      * @dataProvider provideValidTimes
      */
     public function testValidTimes($sapTime, $startDate, $expected)
     {
-        $dateTime = new \DateTime($startDate);
+        $dateTime = new DateTime($startDate);
         $time = SapDateInterval::createFromDateString($sapTime);
         $dateTime->add($time);
         static::assertSame($expected, $dateTime->format('Y-m-d H:i:s'));
