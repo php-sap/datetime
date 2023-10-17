@@ -52,7 +52,7 @@ class SapDateTime extends DateTime
      * This regular expression covers only years from 1900 to 9999.
      * @var string regular expression for parsing an SAP week.
      */
-    protected static $sapWeekRegex = '~^(19[\d]{2}|[2-9][\d]{3})(0[1-9]|[1-4][\d]|5[0-3])$~';
+    protected static string $sapWeekRegex = '~^(19[\d]{2}|[2-9][\d]{3})(0[1-9]|[1-4][\d]|5[0-3])$~';
 
     /**
      * Parse an SAP week string into a new DateTime object.
