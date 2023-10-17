@@ -95,7 +95,7 @@ class SapDateTime extends DateTime
         if ($format === static::SAP_DATE) {
             $result = parent::createFromFormat($format, $datetime, $timezone);
             if ($result !== false) {
-                $result->setTime(0, 0, 0);
+                $result->setTime(0, 0);
             }
             return $result;
         }
