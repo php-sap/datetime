@@ -76,7 +76,7 @@ class SapDateTime extends DateTime
      * Parse a string into a new DateTime object according to the specified format.
      *
      * @param string        $format   Format accepted by date().
-     * @param string        $time     String representing the time.
+     * @param string        $datetime     String representing the time.
      * @param DateTimeZone $timezone A DateTimeZone object representing the desired
      *                                time zone.
      * @return DateTime|bool
@@ -86,19 +86,19 @@ class SapDateTime extends DateTime
      */
     public static function createFromFormat(
         $format,
-        $time,
+        $datetime,
         $timezone = null
     ) {
         if ($format === static::SAP_WEEK) {
-            return static::createFromSapWeek($time, $timezone);
+            return static::createFromSapWeek($datetime, $timezone);
         }
         if ($format === static::SAP_DATE) {
-            $result = parent::createFromFormat($format, $time, $timezone);
+            $result = parent::createFromFormat($format, $datetime, $timezone);
             if ($result !== false) {
                 $result->setTime(0, 0, 0);
             }
             return $result;
         }
-        return parent::createFromFormat($format, $time, $timezone);
+        return parent::createFromFormat($format, $datetime, $timezone);
     }
 }

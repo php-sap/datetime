@@ -33,15 +33,15 @@ class SapDateInterval extends DateInterval
 
     /**
      * Sets up a DateInterval from the relative parts of the string
-     * @param string $time
+     * @param string $datetime
      * @return DateInterval
      * @throws Exception
      * @link https://php.net/manual/en/dateinterval.createfromdatestring.php
      */
-    public static function createFromDateString($time)
+    public static function createFromDateString($datetime)
     {
         $matches = [];
-        if (preg_match('~^([\d]{2})([0-5][\d])([0-5][\d])$~', $time, $matches)) {
+        if (preg_match('~^([\d]{2})([0-5][\d])([0-5][\d])$~', $datetime, $matches)) {
             return new parent(sprintf(
                 'PT%sH%sM%sS',
                 $matches[1],
@@ -49,6 +49,6 @@ class SapDateInterval extends DateInterval
                 $matches[3]
             ));
         }
-        return parent::createFromDateString($time);
+        return parent::createFromDateString($datetime);
     }
 }
