@@ -27,22 +27,22 @@ class SapDateTime extends \DateTime
     /**
      * @const string SAP week format.
      */
-    const SAP_WEEK = 'oW';
+    public const SAP_WEEK = 'oW';
 
     /**
      * @const string SAP date format.
      */
-    const SAP_DATE = 'Ymd';
+    public const SAP_DATE = 'Ymd';
 
     /**
      * @const string SAP time format
      */
-    const SAP_TIME = 'His';
+    public const SAP_TIME = 'His';
 
     /**
      * @const string SAP timestamp format.
      */
-    const SAP_TIMESTAMP = 'YmdHis';
+    public const SAP_TIMESTAMP = 'YmdHis';
 
     /**
      * This regular expression covers only years from 1900 to 9999.

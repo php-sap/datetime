@@ -28,7 +28,7 @@ class SapDateInterval extends DateInterval
     /**
      * @var string SAP time format for DateInterval
      */
-    const SAP_TIME = '%H%I%S';
+    public const SAP_TIME = '%H%I%S';
 
     /**
      * Sets up a DateInterval from the relative parts of the string
