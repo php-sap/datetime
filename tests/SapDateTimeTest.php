@@ -10,6 +10,8 @@
  * @license MIT
  */
 
+declare(strict_types=1);
+
 namespace tests\phpsap\DateTime;
 
 use DateTime;
