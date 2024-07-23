@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace tests\phpsap\DateTime;
 
+use DateInterval;
 use DateTime;
 use Exception;
 use phpsap\DateTime\SapDateInterval;
@@ -32,7 +33,7 @@ class SapDateIntervalTest extends TestCase
 {
     /**
      * Data provider for valid time return values from SAP.
-     * @return array
+     * @return array<int, array<int, string>>
      */
     public static function provideValidTimes(): array
     {
@@ -51,10 +52,11 @@ class SapDateIntervalTest extends TestCase
      * @throws Exception
      * @dataProvider provideValidTimes
      */
-    public function testValidTimes(string $sapTime, string $startDate, string $expected)
+    public function testValidTimes(string $sapTime, string $startDate, string $expected): void
     {
         $dateTime = new DateTime($startDate);
         $time = SapDateInterval::createFromDateString($sapTime);
+        static::assertInstanceOf(DateInterval::class, $time);
         $dateTime->add($time);
         static::assertSame($expected, $dateTime->format('Y-m-d H:i:s'));
     }
