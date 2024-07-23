@@ -21,7 +21,7 @@ use Exception;
 /**
  * Class phpsap\DateTime\SapDateTime
  *
- * Helps converting between PHPs DateTime objects and SAP week, date, time and
+ * Helps to convert between PHPs DateTime objects and SAP week, date, time and
  * timestamp.
  *
  * @package phpsap\DateTime
