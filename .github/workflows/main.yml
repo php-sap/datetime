@@ -49,9 +49,6 @@ jobs:
           php-version: "${{ matrix.php-version }}"
           coverage: "xdebug"
 
-      - name: "check PHP version"
-        run: "php -v"
-
       - name: "get composer cache directory"
         id: "composer-cache"
         run: "echo \"dir=$(composer config cache-files-dir)\" >> $GITHUB_OUTPUT"
