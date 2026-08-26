@@ -1,8 +1,6 @@
 # SAP DateTime
 
 [![License: MIT][license-mit]](LICENSE)
-[![Maintainability][maintainability-badge]][maintainability]
-[![Test Coverage][coverage-badge]][coverage]
 
 Extends PHP's [DateTime][datetime] class by SAP week, date, time and timestamp
 format. Extends PHP's [DateInterval][dateinterval] class by SAP time format.
@@ -149,9 +147,5 @@ echo $dateTime->format(SapDateTime::SAP_TIMESTAMP) . PHP_EOL;
 ```
 
 [license-mit]: https://img.shields.io/badge/license-MIT-blue.svg
-[maintainability-badge]: https://api.codeclimate.com/v1/badges/1bfab925e39bfaf242fc/maintainability
-[maintainability]: https://codeclimate.com/github/php-sap/datetime/maintainability
-[coverage-badge]: https://api.codeclimate.com/v1/badges/1bfab925e39bfaf242fc/test_coverage
-[coverage]: https://codeclimate.com/github/php-sap/datetime/test_coverage
 [datetime]: https://www.php.net/manual/en/class.datetime.php
 [dateinterval]: https://www.php.net/manual/en/class.dateinterval.php
