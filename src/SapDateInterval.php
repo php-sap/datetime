@@ -40,6 +40,7 @@ class SapDateInterval extends DateInterval
      * @throws Exception
      * @link https://php.net/manual/en/dateinterval.createfromdatestring.php
      */
+    #[\ReturnTypeWillChange]
     public static function createFromDateString(string $datetime): DateInterval|false
     {
         $matches = [];
