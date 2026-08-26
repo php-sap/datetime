@@ -1,10 +1,10 @@
 *               text eol=lf
-.github			export-ignore
+.github         export-ignore
 tests/          export-ignore
 .gitattributes  export-ignore
 .gitignore      export-ignore
-.phpcs.xml		export-ignore
+phpcs.xml       export-ignore
 composer.*      export-ignore
-phpstan.neon	export-ignore
+phpstan.neon    export-ignore
 phpunit.xml     export-ignore
-README.*        export-ignore
+README.md       export-ignore
