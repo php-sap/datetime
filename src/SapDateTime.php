@@ -65,7 +65,7 @@ class SapDateTime extends DateTime
      * @return DateTime|false
      * @throws Exception
      */
-    public static function createFromSapWeek(string $sapWeek, DateTimeZone $timezone = null): DateTime|false
+    public static function createFromSapWeek(string $sapWeek, ?DateTimeZone $timezone = null): DateTime|false
     {
         if (preg_match(static::$sapWeekRegex, $sapWeek, $matches) !== 1) {
             return false;
