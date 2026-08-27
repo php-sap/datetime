@@ -21,10 +21,6 @@ use Exception;
  * Class SapDateInterval
  *
  * Helps to convert SAP time values to intervals for times greater than 24 hours.
- *
- * @package phpsap\DateTime
- * @author  Gregor J.
- * @license MIT
  */
 class SapDateInterval extends DateInterval
 {

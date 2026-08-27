@@ -24,10 +24,6 @@ use PHPUnit\Framework\TestCase;
  * Class SapDateIntervalTest
  *
  * Unit tests for the SapDateTime class.
- *
- * @package tests\phpsap\DateTime
- * @author  Gregor J.
- * @license MIT
  */
 class SapDateIntervalTest extends TestCase
 {

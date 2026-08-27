@@ -23,10 +23,6 @@ use Exception;
  *
  * Helps to convert between PHPs DateTime objects and SAP week, date, time and
  * timestamp.
- *
- * @package phpsap\DateTime
- * @author  Gregor J.
- * @license MIT
  */
 class SapDateTime extends DateTime
 {
