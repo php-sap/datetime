@@ -146,6 +146,17 @@ echo $dateTime->format(SapDateTime::SAP_TIMESTAMP) . PHP_EOL;
  */
 ```
 
+## Development
+
+All development commands (install, test, lint, analyze, beautify, sniff, audit,
+validate) run via Docker through the `Makefile`, so no local PHP installation is
+needed. Run `make help` to list all targets. Most targets require `PHP_VERSION`,
+e.g.:
+
+```sh
+make install PHP_VERSION=8.1
+```
+
 [license-mit]: https://img.shields.io/badge/license-MIT-blue.svg
 [datetime]: https://www.php.net/manual/en/class.datetime.php
 [dateinterval]: https://www.php.net/manual/en/class.dateinterval.php
