@@ -1,8 +1,8 @@
 name: "CI"
 
 on:
-  push:
   pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -43,31 +43,16 @@ jobs:
         include:
           - php-version: "8.1"
             dependencies: "lowest"
+          - php-version: "8.5"
+            dependencies: "default"
+          - php-version: "8.5"
+            dependencies: "lowest"
     steps:
       - name: "git checkout"
         uses: "actions/checkout@v7"
         with:
           persist-credentials: false
-      - name: "setup PHP"
-        uses: "shivammathur/setup-php@v2"
-        with:
-          php-version: "${{ matrix.php-version }}"
-          coverage: "xdebug"
-          tools: "composer:v2"
-      - name: "install composer dependencies (locked)"
-        if: "matrix.dependencies == 'locked'"
-        run: "composer install --prefer-dist --no-progress --no-interaction"
-      - name: "install composer dependencies (lowest)"
-        if: "matrix.dependencies == 'lowest'"
-        run: "composer update --prefer-lowest --prefer-dist --no-progress --no-interaction"
-      - name: "audit dependencies for known security vulnerabilities"
-        if: "matrix.php-version == '8.1'"
-        run: "composer audit"
-      - name: "lint PHP files"
-        run: "find src tests -type f -name '*.php' -print0 | xargs -0 -n1 php -l"
-      - name: "run PHPUnit"
-        run: "php vendor/bin/phpunit --coverage-text --colors=never"
-      - name: "run PHPStan"
-        run: "php vendor/bin/phpstan analyse --no-progress"
-      - name: "run PHPCS"
-        run: "php vendor/bin/phpcs"
+      - name: "Install, check and audit the same dependency snapshot"
+        env:
+          LOWEST: "${{ matrix.dependencies == 'lowest' && '1' || '0' }}"
+        run: "make check PHP_VERSION=${{ matrix.php-version }} DEPENDENCIES_LOWEST=$LOWEST"
