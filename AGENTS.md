@@ -44,17 +44,17 @@ date/time parsing. Keep it that way — don't introduce a dependency back into t
 
 ## Developer Workflows
 
-All commands run through the `Makefile` via Docker, so the host machine does not need a
-local PHP installation. Run `make help` for the full target list. Use PHP 8.1, 8.2, 8.3,
-and 8.4 (matching the CI matrix in `.github/workflows/main.yml`) for anything
-version-sensitive (PHPStan, PHP lint, tests). If you are behind a proxy, `install` and
-`audit` already forward `HTTP_PROXY`/`HTTPS_PROXY`/`NO_PROXY`; pass
-`CA_CERT_FILE=/path/to/ca.pem` to trust a corporate proxy root CA inside the container.
+Run `make help` for the Docker-backed developer targets. Use `make check` for
+the full CI workflow, including coverage and the audit of the same dependency
+snapshot. See README for the PHP matrix, host tools, proxy and CA configuration.
 
 ```bash
 # Install/update dependencies for a given PHP version (set DEPENDENCIES_LOWEST=1 for
 # --prefer-lowest, matching the CI "lowest" matrix job)
 make install PHP_VERSION=8.1
+
+# Run all QA and audit one resolved snapshot
+make check PHP_VERSION=8.5 DEPENDENCIES_LOWEST=1
 
 # Run PHPUnit
 make test PHP_VERSION=8.1
@@ -78,11 +78,8 @@ make audit
 make validate
 ```
 
-**Always use these Makefile targets instead of inventing ad-hoc `docker run`/`composer`/
-`php` commands.** If a task needs something the Makefile doesn't expose directly (e.g.
-PHPUnit for a single test file/method), take the exact `docker run` invocation from the
-matching Makefile target (image, `DOCKER_USER`, `DOCKER_MOUNT`, env forwarding) and only
-append the extra arguments — don't build the command from scratch.
+Use these Makefile targets for QA. For a single-file check, adapt the matching
+target's container invocation and append the tool's file argument.
 
 ## Conventions
 - Use strict typing in every PHP file: `declare(strict_types=1);`.
@@ -103,4 +100,3 @@ append the extra arguments — don't build the command from scratch.
 - Always run QA/build commands through the `Makefile` targets, not self-invented `docker run`
   commands. For one-off variants (a single test, a single file), base the invocation on the
   relevant Makefile target and only append the extra arguments.
-

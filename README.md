@@ -13,7 +13,7 @@ format. Extends PHP's [DateInterval][dateinterval] class by SAP time format.
 ## Usage
 
 ```
-composer require php-sap/datetime:~1.0.0
+composer require php-sap/datetime
 ```
 
 ### Parse a SAP week string into a DateTime object. 
@@ -72,7 +72,7 @@ use phpsap\DateTime\SapDateTime;
 $dateTime = SapDateTime::createFromFormat(SapDateTime::SAP_TIME, '132001');
 echo $dateTime->format('H:i:s') . PHP_EOL;
 /**
- * Output: 13-20-01
+ * Output: 13:20:01
  */
 ```
 
@@ -115,7 +115,7 @@ echo $dateTime->format(SapDateTime::SAP_TIME) . PHP_EOL;
 ```php
 <?php
 use phpsap\DateTime\SapDateInterval;
-$time = new SapDateInterval('PTH21M45S05');
+$time = new SapDateInterval('PT21H45M05S');
 echo $time->format(SapDateInterval::SAP_TIME) . PHP_EOL;
 /**
  * Output: 214505
@@ -148,14 +148,36 @@ echo $dateTime->format(SapDateTime::SAP_TIMESTAMP) . PHP_EOL;
 
 ## Development
 
-All development commands (install, test, lint, analyze, beautify, sniff, audit,
-validate) run via Docker through the `Makefile`, so no local PHP installation is
-needed. Run `make help` to list all targets. Most targets require `PHP_VERSION`,
-e.g.:
+Development commands run through the Docker-backed `Makefile`; PHP need not be
+installed locally. PHP `^8.1` is supported. CI checks PHP 8.1 and 8.5 with
+normal and lowest dependencies, while retaining the existing PHP 8.2–8.4
+checks during the required-check transition. Run `make help` for all targets.
 
 ```sh
-make install PHP_VERSION=8.1
+make check PHP_VERSION=8.1
+make check PHP_VERSION=8.5 DEPENDENCIES_LOWEST=1
 ```
+
+`check` resolves dependencies, runs lint, PHPUnit with Xdebug coverage, PHPStan
+and PHPCS, then audits that same temporary lockfile. `install` removes its
+temporary lockfile, so a later standalone `audit` does not verify that earlier
+snapshot. `clean` removes `vendor/` and the PHPUnit cache, not a pre-existing
+lockfile. Composer uses an isolated manifest copy in the project root and does
+not modify the checked-in Composer configuration.
+
+The host needs Docker, `curl` and `sha256sum`. `check` downloads the pinned
+Xdebug source and verifies its SHA-256 before building it inside the target PHP
+container. The Composer executable comes from `COMPOSER_IMAGE` (default
+`composer:2`); Composer and QA run under the requested PHP image. The container
+installs `git` and `unzip` for dependency resolution. Proxy environment variables
+and an optional `CA_CERT_FILE` are forwarded, and `COMPOSER_CACHE_DIR` controls
+the cache. A configured `config.platform.php` must match the actual PHP patch
+version; simulated PHP resolution is rejected.
+
+Changes to `main` use pull requests and squash merges. Issue branches should be
+named `<issue-number>-<title-slug>`. The force-push ruleset excludes the broader
+glob `[0-9]*-*`, which also matches some names outside that convention; it does
+not enforce the PR source. Main is protected separately.
 
 [license-mit]: https://img.shields.io/badge/license-MIT-blue.svg
 [datetime]: https://www.php.net/manual/en/class.datetime.php
