@@ -165,14 +165,17 @@ snapshot. `clean` removes `vendor/` and the PHPUnit cache, not a pre-existing
 lockfile. Composer uses an isolated manifest copy in the project root and does
 not modify the checked-in Composer configuration.
 
-The host needs Docker, `curl` and `sha256sum`. `check` downloads the pinned
+The host needs Docker, `curl`, `sha256sum` and `flock`. Install, check, audit
+and clean serialize on the manifest to protect the shared `vendor/` directory.
+`check` downloads the pinned
 Xdebug source and verifies its SHA-256 before building it inside the target PHP
 container. The Composer executable comes from `COMPOSER_IMAGE` (default
 `composer:2`); Composer and QA run under the requested PHP image. The container
 installs `git` and `unzip` for dependency resolution. Proxy environment variables
 and an optional `CA_CERT_FILE` are forwarded, and `COMPOSER_CACHE_DIR` controls
-the cache. A configured `config.platform.php` must match the actual PHP patch
-version; simulated PHP resolution is rejected.
+the cache. If `config.platform.php` is present, only the isolated manifest copy
+uses the actual PHP patch version; other platform settings and the checked-in
+manifest remain unchanged.
 
 Changes to `main` use pull requests and squash merges. Issue branches should be
 named `<issue-number>-<title-slug>`. The force-push ruleset excludes the broader

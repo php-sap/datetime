@@ -31,14 +31,12 @@ case "$MODE" in
     validate) php /tmp/composer validate --strict --no-check-lock ;;
     audit) php /tmp/composer audit --no-interaction ;;
     install|check)
-        php -r '
-            $config = json_decode(file_get_contents(getenv("COMPOSER")), true, 512, JSON_THROW_ON_ERROR);
-            $platform = $config["config"]["platform"] ?? [];
-            if (array_key_exists("php", $platform) && $platform["php"] !== PHP_VERSION) {
-                fwrite(STDERR, "config.platform.php does not match the actual PHP runtime; refusing simulated resolution.\n");
-                exit(1);
-            }
-        '
+        if php -r '
+            $config = json_decode(file_get_contents(getenv("COMPOSER")), false, 512, JSON_THROW_ON_ERROR);
+            exit(isset($config->config->platform) && property_exists($config->config->platform, "php") ? 0 : 1);
+        '; then
+            php /tmp/composer config platform.php "$(php -r 'echo PHP_VERSION;')"
+        fi
         if [ "$DEPENDENCIES_LOWEST" = 1 ]; then
             php /tmp/composer update --prefer-lowest --prefer-dist --no-interaction --no-progress
         else
@@ -50,6 +48,7 @@ case "$MODE" in
             snapshot=$(sha256sum "$lockfile")
             sh tests/makefile-clean-test.sh
             sh tests/makefile-failure-test.sh
+            sh tests/makefile-concurrency-test.sh
             find src tests -type f -name "*.php" -print0 | xargs -0 -n1 php -l
             php -d zend_extension=xdebug.so -d xdebug.mode=coverage vendor/bin/phpunit --coverage-text --colors=never
             php vendor/bin/phpstan analyse --memory-limit=-1

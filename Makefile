@@ -16,7 +16,7 @@ help: ## Show available targets
 		awk 'BEGIN {FS = ":.*## "}; {printf "  %-18s %s\n", $$1, $$2}'
 
 clean: ## Remove vendor/ and PHPUnit cache, preserving user lockfiles
-	rm -rf vendor .phpunit.result.cache
+	flock -x composer.json rm -rf vendor .phpunit.result.cache
 
 check-php-version: ## Show and verify the requested PHP runtime
 	@$(DOCKER_RUN) php -r 'printf("PHP %s\n", PHP_VERSION); if (!in_array(getenv("PHP_VERSION"), [PHP_MAJOR_VERSION . "." . PHP_MINOR_VERSION, PHP_VERSION], true)) { exit(1); }'

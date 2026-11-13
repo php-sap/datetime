@@ -5,6 +5,8 @@ mode=${1:?expected install, check, audit, or validate}
 case "$mode" in install|check|audit|validate) ;; *) echo "Unknown mode: $mode" >&2; exit 1 ;; esac
 case "$DEPENDENCIES_LOWEST" in 0|1) ;; *) echo 'DEPENDENCIES_LOWEST must be 0 or 1' >&2; exit 1 ;; esac
 
+exec 9<composer.json
+flock -x 9
 temporary=$(mktemp -d)
 manifest=
 cleanup() {
