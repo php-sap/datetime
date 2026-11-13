@@ -29,7 +29,13 @@ php -r 'printf("PHP %s\n", PHP_VERSION); if (!in_array(getenv("PHP_VERSION"), [P
 php /tmp/composer --version
 case "$MODE" in
     validate) php /tmp/composer validate --strict --no-check-lock ;;
-    audit) php /tmp/composer audit --no-interaction ;;
+    audit)
+        if [ ! -f vendor/composer/installed.json ]; then
+            echo 'No installed dependencies to audit; run make install first' >&2
+            exit 1
+        fi
+        php /tmp/composer audit --no-interaction
+        ;;
     install|check)
         if php -r '
             $config = json_decode(file_get_contents(getenv("COMPOSER")), false, 512, JSON_THROW_ON_ERROR);
@@ -46,6 +52,7 @@ case "$MODE" in
         if [ "$MODE" = check ]; then
             lockfile="${COMPOSER%.json}.lock"
             snapshot=$(sha256sum "$lockfile")
+            sh tests/makefile-audit-test.sh
             sh tests/makefile-clean-test.sh
             sh tests/makefile-failure-test.sh
             sh tests/makefile-concurrency-test.sh
